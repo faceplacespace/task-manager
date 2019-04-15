@@ -1,1 +1,2 @@
-.nbproject/*
+nbproject/
+*.DS_Store
