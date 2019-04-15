@@ -22,7 +22,7 @@
       <?php else: ?>  
       <p>Заполните все поля.</p>
       <?php endif;?>
-      <a href="<?=$_SERVER['HTTP_REFERER']; ?>">Назад</a>
+      <a href="<?=$_SERVER['HTTP_REFERER'];?>">Назад</a>
     </div>
   </body>
 </html>
