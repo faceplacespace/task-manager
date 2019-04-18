@@ -1,10 +1,10 @@
 <?php
 
-    require_once($_SERVER['DOCUMENT_ROOT'].'/dbconn.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/dbconn.php');
 
-    if(!isset($_SESSION['logged_user'])) {
-        header('Location: login-form.php');
-    }
+if(!isset($_SESSION['user_id'])) {
+    header('Location: login-form.php');
+}
 
 ?>
 <!doctype html>
@@ -30,7 +30,7 @@
               <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
             </div>
             <div class="col-sm-4 offset-md-1 py-4">
-              <h4 class="text-white"><?=$_SESSION['logged_user'];?></h4>
+              <h4 class="text-white"><?=$_SESSION['user_email'];?></h4>
               <ul class="list-unstyled">
                 <li><a href="#" class="text-white">Выйти</a></li>
               </ul>

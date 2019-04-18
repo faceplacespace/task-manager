@@ -1,4 +1,12 @@
+<?php
 
+require_once($_SERVER['DOCUMENT_ROOT'].'/dbconn.php');
+
+if(isset($_SESSION['user_id'])) {
+    header('Location: index.php');
+}
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
