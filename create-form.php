@@ -30,7 +30,7 @@ if(!isset($_SESSION['user_id'])) {
         <h1 class="h3 mb-3 font-weight-normal">Добавить запись</h1>
         <label for="inputTitle" class="sr-only">Название</label>
         <input type="text" id="inputTitle" name="title" class="form-control" placeholder="Название" required>
-        <label for="inputEmail" class="sr-only">Описание</label>
+        <label for="inputDescription" class="sr-only">Описание</label>
         <textarea name="description" class="form-control" cols="30" rows="10" placeholder="Описание"></textarea>
         <input type="hidden" name="MAX_FILE_SIZE" value="30000000">
         <input type="file" name="task-image">

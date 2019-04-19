@@ -2,7 +2,7 @@
 
 require_once($_SERVER['DOCUMENT_ROOT'].'/dbconn.php');
 
-if(empty($_POST['name']) || empty($_POST['email']) || empty($_POST['email'])) {
+if(empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password'])) {
             
     include($_SERVER['DOCUMENT_ROOT'].'/errors.php');
     exit();

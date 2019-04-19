@@ -5,6 +5,13 @@
     if(!isset($_SESSION['user_id'])) {
         header('Location: login-form.php');
     }
+    
+    $taskId = $_GET['id'];
+
+    $sql = 'SELECT * FROM task WHERE id = :id';
+    $statement = $pdo->prepare($sql);
+    $statement->execute([':id' => $taskId]);
+    $task = $statement->fetch(PDO::FETCH_OBJ);
 
 ?>
 <!doctype html>
@@ -17,19 +24,14 @@
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
-    
-    <style>
-      
-    </style>
+
   </head>
 
   <body>
     <div class="form-wrapper text-center">
-      <img src="assets/img/no-image.jpg" alt="" width="400">
-      <h2>Lorem ipsum</h2>
-      <p>
-        Пройти первый а потом второй урок. Закрепить практикой и написать проект сначала без подглядываний.
-      </p>
+        <img src="/uploads/<?=$task->image;?>" alt="" width="400">
+      <h2><?=$task->title;?></h2>
+      <p><?=$task->description;?></p>
     </div>
   </body>
 </html>
