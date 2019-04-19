@@ -12,6 +12,12 @@
     $statement = $pdo->prepare($sql);
     $statement->execute([':id' => $taskId]);
     $task = $statement->fetch(PDO::FETCH_OBJ);
+    
+    $imagePath = '/assets/img/no-image.jpg';
+    
+    if($task->image !== null){
+        $imagePath = '/uploads/'.$task->image;
+    }
 
 ?>
 <!doctype html>
@@ -29,7 +35,7 @@
 
   <body>
     <div class="form-wrapper text-center">
-        <img src="/uploads/<?=$task->image;?>" alt="" width="400">
+        <img src="<?=$imagePath;?>" alt="" width="400">
       <h2><?=$task->title;?></h2>
       <p><?=$task->description;?></p>
     </div>

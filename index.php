@@ -75,7 +75,11 @@ $tasks = $statement->fetchAll(PDO::FETCH_OBJ);
               <?php foreach($tasks as $task):?>
              <div class="col-md-4">
               <div class="card mb-4 shadow-sm">
+                  <?php if($task->image !== null):?>
                   <img class="card-img-top" src="/uploads/<?=$task->image?>">
+                  <?php else:?>
+                  <img class="card-img-top" src="/assets/img/no-image.jpg">
+                  <?php endif;?>
                 <div class="card-body">
                   <p class="card-text"><?=$task->title?></p>
                   <div class="d-flex justify-content-between align-items-center">
