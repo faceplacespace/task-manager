@@ -1,23 +1,23 @@
 <?php
 
-    require_once($_SERVER['DOCUMENT_ROOT'].'/dbconn.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/components/components.php');
 
-    if(!isset($_SESSION['user_id'])) {
-        header('Location: login-form.php');
-    }
-    
-    $taskId = $_GET['id'];
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login-form.php');
+}
 
-    $sql = 'SELECT * FROM task WHERE id = :id';
-    $statement = $pdo->prepare($sql);
-    $statement->execute([':id' => $taskId]);
-    $task = $statement->fetch(PDO::FETCH_OBJ);
-    
-    $imagePath = '/assets/img/no-image.jpg';
-    
-    if($task->image !== null){
-        $imagePath = '/uploads/'.$task->image;
-    }
+$imagePath = '/assets/img/no-image.jpg';
+
+$taskId = $_GET['id'];
+
+$sql = 'SELECT * FROM task WHERE id = :id';
+$statement = $pdo->prepare($sql);
+$statement->execute([':id' => $taskId]);
+$task = $statement->fetch(PDO::FETCH_OBJ);
+
+if ($task->image !== null){
+    $imagePath = '/uploads/'.$task->image;
+}
 
 ?>
 <!doctype html>

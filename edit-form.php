@@ -1,8 +1,8 @@
 <?php
 
-require_once($_SERVER['DOCUMENT_ROOT'].'/dbconn.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/components/components.php');
 
-if(!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id'])) {
     header('Location: login-form.php');
 }
 
@@ -32,7 +32,7 @@ $task = $statement->fetch(PDO::FETCH_OBJ);
         <form class="form-signin" action="/edit.php" method="post" enctype="multipart/form-data">
         <img class="mb-4" src="assets/img/bootstrap-solid.svg" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Изменить запись</h1>
-        <input type="hidden" name="taskId" value="<?=$task->id?>">
+        <input type="hidden" name="task-id" value="<?=$task->id?>">
         <label for="inputTitle" class="sr-only">Название</label>
         <input type="text" id="inputTitle" name="title" class="form-control" placeholder="Название" required value="<?=$task->title?>">
         <label for="inputDescription" class="sr-only">Описание</label>

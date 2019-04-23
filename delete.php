@@ -1,8 +1,8 @@
 <?php
 
-    require_once($_SERVER['DOCUMENT_ROOT'].'/dbconn.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/components/components.php');
 
-    if(!isset($_SESSION['user_id'])) {
+    if (!isset($_SESSION['user_id'])) {
         header('Location: login-form.php');
     }
     
@@ -12,15 +12,15 @@
     $statement = $pdo->prepare($sql);
     $deleteTask = $statement->execute([':id' => $taskId]);
     
-    if($deleteTask) {
+    if ($deleteTask) {
+        
+        if (file_exists('/uploads/'.$currentImage)) {
+            unlink('/uploads/'.$currentImage);
+        }
 
         header('Location: /index.php');
         exit();
 
-    } else {
-
-        $errorMessage = 'Ошибка при удалении задачи.';
-        include($_SERVER['DOCUMENT_ROOT'].'/errors.php');
-        exit();
-
+    } else {     
+        displayError('Ошибка при удалении задачи.');
     }

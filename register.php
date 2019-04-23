@@ -1,12 +1,13 @@
 <?php
 
-require_once($_SERVER['DOCUMENT_ROOT'].'/dbconn.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/components/components.php');
 
-if(empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password'])) {
-            
-    include($_SERVER['DOCUMENT_ROOT'].'/errors.php');
-    exit();
-    
+if (isset($_SESSION['user_id'])) {
+    header('Location: /index.php');
+}
+
+if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password'])) {   
+    displayError();
 }
 
 $name = trim($_POST['name']);
@@ -18,12 +19,8 @@ $statement = $pdo->prepare($sql);
 $statement->execute([':email' => $email]);
 $user = $statement->fetchColumn();
 
-if($user) {
-    
-    $errorMessage = 'Пользователь с таким email уже существует';
-    include 'errors.php';
-    exit();
-    
+if ($user) {
+    displayError('Пользователь с таким email уже существует');
 }
 
 $sql = 'INSERT INTO user (name, email, password) VALUES (:name, :email, :password)';
@@ -33,12 +30,8 @@ $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
 $result = $statement->execute($_POST);
 
-if(!result) {
-    
-    $errorMessage = 'Ошибка регистрации';
-    include '/errors.php';
-    exit();
-    
+if (!result) {
+    displayError('Ошибка регистрации');
 }
 
 header('Location: /login-form.php');

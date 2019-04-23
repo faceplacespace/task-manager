@@ -1,8 +1,8 @@
 <?php
 
-require_once($_SERVER['DOCUMENT_ROOT'].'/dbconn.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/components/components.php');
 
-if(!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id'])) {
     header('Location: login-form.php');
 }
 
@@ -37,7 +37,7 @@ $tasks = $statement->fetchAll(PDO::FETCH_OBJ);
             <div class="col-sm-4 offset-md-1 py-4">
               <h4 class="text-white"><?=$_SESSION['user_email'];?></h4>
               <ul class="list-unstyled">
-                <li><a href="#" class="text-white">Выйти</a></li>
+                  <li><a href="/logout.php" class="text-white">Выйти</a></li>
               </ul>
             </div>
           </div>

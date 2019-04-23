@@ -17,11 +17,7 @@
 
   <body>
     <div class="container text-center mt-5">
-      <?php if(isset($errorMessage)):?>
       <p><?=$errorMessage?></p>
-      <?php else: ?>  
-      <p>Заполните все поля.</p>
-      <?php endif;?>
       <a href="<?=$_SERVER['HTTP_REFERER'];?>">Назад</a>
     </div>
   </body>
