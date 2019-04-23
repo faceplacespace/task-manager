@@ -21,12 +21,12 @@ if (is_uploaded_file($_FILES['task-image']['tmp_name'])) {
     $fileName = uploadImage();
 }
 
-$sql = 'SELECT image FROM task WHERE id = :id';
-$statement = $pdo->prepare($sql);
-$statement->execute(['id' => $taskId]);
-$task = $statement->fetch(PDO::FETCH_OBJ);
+//$sql = 'SELECT image FROM task WHERE id = :id';
+//$statement = $pdo->prepare($sql);
+//$statement->execute(['id' => $taskId]);
+//$task = $statement->fetch(PDO::FETCH_OBJ);
 
-$currentImage = $task->image;
+$currentImage = getImageByTaskID($pdo, $taskId);
 
 $sql = 'UPDATE task SET title = :title, description = :description, image = :image WHERE id = :id';
 $statement = $pdo->prepare($sql);
@@ -34,12 +34,11 @@ $task = $statement->execute([':id' => $taskId, ':title' => $title, ':description
 
 if ($task) {
     
-    if (file_exists('/uploads/'.$currentImage)) {
-        unlink('/uploads/'.$currentImage);
+    if (file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/'.$currentImage)) {
+        unlink($_SERVER['DOCUMENT_ROOT'].'/uploads/'.$currentImage);
     }
-    
+
     header('Location: /index.php');
-    exit();
 
 } else {
     displayError('Ошибка при изменении задачи.');  

@@ -7,6 +7,8 @@
     }
     
     $taskId = $_GET['id'];
+    
+    $currentImage = getImageByTaskID($pdo, $taskId);
 
     $sql = 'DELETE FROM task WHERE id = :id';
     $statement = $pdo->prepare($sql);
@@ -14,8 +16,8 @@
     
     if ($deleteTask) {
         
-        if (file_exists('/uploads/'.$currentImage)) {
-            unlink('/uploads/'.$currentImage);
+        if (file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/'.$currentImage)) {
+            unlink($_SERVER['DOCUMENT_ROOT'].'/uploads/'.$currentImage);
         }
 
         header('Location: /index.php');

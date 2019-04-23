@@ -33,6 +33,17 @@ function uploadImage() {
     
 }
 
+function getImageByTaskID($pdo, $taskId) {
+    
+    $sql = 'SELECT image FROM task WHERE id = :id';
+    $statement = $pdo->prepare($sql);
+    $statement->execute(['id' => $taskId]);
+    $task = $statement->fetch(PDO::FETCH_OBJ);
+
+    return $task->image;
+    
+}
+
 function updateToken($pdo) {
     
     $sql = 'UPDATE user SET password_cookie_token = null WHERE password_cookie_token = :token';
